@@ -7,31 +7,13 @@ Internal Developer Platform
 [![GitHub issues](https://img.shields.io/github/issues/openchoreo/openchoreo.svg)](https://github.com/openchoreo/openchoreo/issues)
 [![Twitter Follow](https://img.shields.io/twitter/follow/Choreo?style=social)](https://twitter.com/ChoreoDev)
 
-## What is OpenChoreo?
+OpenChoreo is an open-source internal developer platform (IDP) designed for both platform engineers and application developers.
+- For platform engineers, it provides a complete yet configurable platform that integrates with CI/CD systems, security tools, and cloud infrastructure. It supports enforcement of organizational policies and reduces the need to manage individual toolchains.
+- For developers, it offers a set of abstractions that simplify working with Kubernetes and other infrastructure components. These abstractions allow developers to design, deploy, and manage applications without direct interaction with the underlying systems.
 
-OpenChoreo is an open-source internal developer platform (IDP) designed for both platform engineers and developers.
-- For platform engineers, Choreo offers a customizable yet fully-featured platform that integrates CI/CD, security, and cloud tools, enforcing best practices while reducing operational overhead.
-- For developers, it abstracts away infrastructure complexities, enabling them to focus on building and deploying applications with minimal friction.
+OpenChoreo builds upon years of experience at [WSO2](https://wso2.com/) in building [WSO2 Choreo](https://choreo.dev/) — an IDP as a Service. WSO2 Choreo is designed not only to automate software delivery workflows but also to support software engineering practices by enforcing architectural standards, encouraging service reuse, and providing integrated capabilities for API management and observability.
 
-Most organizations face a dilemma when adopting an IDP:
-1. Build their own by integrating multiple tools—offering control but requiring significant engineering effort and maintenance.
-2. Buy a SaaS-based IDP, which simplifies adoption but often limits customization and flexibility.
-
-OpenChoreo provides a third path—a self-hosted, open-source IDP that delivers production-grade capabilities out of the box without sacrificing control or flexibility.
-
-[//]: # (Architecture Diagram)
-
-## Inspired by WSO2 Choreo SaaS
-
-OpenChoreo is inspired by **[WSO2 Choreo SaaS](https://choreo.dev/)**, an enterprise-grade internal developer platform that has been adopted by organizations to streamline software delivery and engineering.
-
-WSO2 Choreo SaaS provides a complete IDP experience, combining:
-
-- Software Delivery – Seamless workflows to build, deploy, run, and manage applications at scale.
-- Software Engineering – Advanced capabilities for API management, modularity, service reuse, and observability.
-
-With OpenChoreo, we are bringing these capabilities to the open-source community—allowing organizations to run, extend, and customize an internal developer platform on their own infrastructure, while [WSO2 Choreo SaaS](https://choreo.dev/) remains a fully managed alternative.
-
+With OpenChoreo, we're bringing these best ideas to the open-source community in a Kubernetes-native, GitOps-friendly architecture. It is intended to be a complete self-hosted internal developer platform for organizations, while remaining highly customizable to fit existing tools, workflows, and infrastructure requirements.
 
 ## Getting Started
 
