@@ -1,18 +1,63 @@
 # OpenChoreo Concepts
 
-This repository defines Choreo abstractions in the form of Kubernetes CRDs, enabling developers to use these abstractions to create projects, components, builds, deployments, and more. By leveraging these CRDs, developers can declaratively manage their application's lifecycle and infrastructure, ensuring consistency and repeatability across environments.
+OpenChoreo defines a set of platform-level abstractions that simplify how teams design, deploy, and manage cloud-native applications and their environments. These abstractions provide a unified model for defining, deploying, and managing cloud-native applications and platform infrastructure. While some are more commonly used by developers and others by platform engineers, they are designed to work cohesively in a shared platform model.
 
-- **DataPlane**: Represents a Data Plane in Choreo, responsible for maintaining the health status of the data plane and providing data plane information to other resources.
-- **Environment**: Represents an environment bound to a specific data plane in Choreo, with a reference to an existing `DataPlane` resource.
-- **DeploymentPipeline**: Represents an ordered set of environments that a deployment will go through to reach a critical environment, with a default deployment pipeline for each organization.
-- **Project**: Represents a project in Choreo, enforcing a promotion order for the components within the project, with an optional reference to a deployment pipeline.
-- **Component**: Represents a deployable unit in Choreo, managing the entire lifecycle of the component from source to deployment, with various deployment architectures.
-- **DeploymentTrack**: Represents a deployment path for a component, managing the deployment of the component across environments and handling auto deployment and build management.
-- **Build**: Represents a source code to artifact transformation, managed by the deployment track controller, responsible for configuring build parameters and tracking build artifacts.
-- **DeployableArtifact**: Represents a build artifact with environment-independent configurations, ready to be deployed to an environment, created by the build controller or manually by the user.
-- **Deployment**: Represents a deployment in an environment bound to a deployment track, managing deployment revisions, deploying artifacts, and monitoring deployment status.
-- **DeploymentRevision**: Represents a snapshot of the deployment resource at a given time, created by the deployment controller to track deployment history and restore deployment specs during revert operations.
-- **Endpoint**: Represents an endpoint exposed by the component, responsible for updating Kubernetes resources, creating managed APIs, and configuring API settings.
-- **Secret**: Represents configuration parameters stored in a key vault, used for storing both system secrets and environment-specific secrets, with various secret types like GitHub, Bitbucket, GitLab, and DockerHub.
+---
 
-These abstractions simplify the development and deployment process, allowing developers to focus on writing code while Choreo handles the underlying infrastructure and operational tasks.
+## 🛠️ Platform and Environment Management
+These abstractions are primarily used to define infrastructure, environments, and deployment flow.
+
+### DataPlane
+Represents a Kubernetes cluster managed by OpenChoreo. It maintains health status, capabilities, and is referenced by environments.
+
+### Environment
+Defines a target deployment stage (e.g., `dev`, `staging`, `prod`). Each environment is bound to a specific `DataPlane` and can enforce policies and overlays.
+
+### DeploymentPipeline
+Defines the ordered progression of deployments across multiple environments. It allows teams to enforce promotion policies and lifecycle consistency.
+
+### Secret
+Represents securely managed configuration values or credentials. Secrets can be environment-specific and support integrations with systems like Vault, GitHub, Bitbucket, and DockerHub.
+
+---
+
+## 🧩 Application Architecture and Lifecycle
+These abstractions describe how applications are structured, how they communicate with each other, and how they are deployed across environments.
+
+### Project
+Represents a cloud-native application composed of multiple components. It acts as the unit of isolation and maps directly to a Kubernetes namespace.
+
+### Component
+Defines a deployable unit within a project, such as a web service, API, worker, or scheduled task. Each component is translated into Kubernetes workload resources like `Deployment`, `Job`, or `StatefulSet`.
+
+### Endpoint
+Describes a network-accessible interface exposed by a component. It defines routing, protocol, and visibility (`public`, `organization`, `project`), and maps to `Service` and `Ingress` resources.
+
+### Connection
+Specifies outbound dependencies for a component. A connection can target either an external service (southbound) or a service in another project (westbound). Connections are enforced via Cilium `NetworkPolicies` and optionally routed through egress gateways.
+
+### Endpoint
+Describes a network-accessible interface exposed by a component. It defines routing rules, protocols, and visibility scopes such as `public`, `organization`, or `project`. Endpoints are mapped to Kubernetes `Service` and `Ingress` resources and are configured through shared ingress gateways.
+
+### Connection
+Defines outbound service dependencies for a component. These can represent connections to services in other projects (westbound traffic) or to external systems (southbound traffic). Connections are translated into network access policies and optionally routed through egress gateways.
+
+### DeploymentTrack
+Manages the progression of a component across environments. It supports automatic promotion and build management based on deployment status.
+
+### Build
+Represents the transformation of source code into a deployable artifact. This includes build configurations and metadata tracked by the control plane.
+
+### DeployableArtifact
+A build output with environment-agnostic configuration, ready to be deployed to any environment.
+
+### Deployment
+Represents the actual rollout of a `DeployableArtifact` to a specific environment. Manages status, versioning, and rollout policies.
+
+### DeploymentRevision
+Tracks the history of a deployment, allowing rollback and inspection of prior deployment states.
+
+---
+
+These abstractions allow teams to focus on application logic and infrastructure governance while OpenChoreo handles the orchestration, security, and operational complexity required to run modern cloud-native applications across multiple environments and clusters.
+
