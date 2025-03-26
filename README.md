@@ -15,6 +15,16 @@ OpenChoreo builds upon years of experience at [WSO2](https://wso2.com/) in build
 
 With OpenChoreo, we're bringing these best ideas to the open-source community in a Kubernetes-native, GitOps-friendly architecture. It is intended to be a complete self-hosted internal developer platform for organizations, while remaining highly customizable to fit existing tools, workflows, and infrastructure requirements.
 
+## How does OpenChoreo work? (TODO)
+The purpose of this section is to explain the high-level design of OpenChoreo. 
+- How does OpenChoreo add value on top of Kubernetes? 
+- Design diagram
+
+<div align="center">
+
+![workflow](./docs/images/choreo_overview.svg)
+</div>
+
 ## Getting Started
 
 The easiest way to try OpenChoreo is by following the **[Quick Start Guide](./docs/quick-start-guide.md)**. It walks you through setting up Choreo using a Dev Container, so you can start experimenting without affecting your local environment.
