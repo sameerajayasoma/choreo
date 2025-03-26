@@ -1,10 +1,10 @@
 # OpenChoreo Concepts
 
-OpenChoreo defines a set of platform-level abstractions that simplify how teams design, deploy, and manage cloud-native applications and their environments. These abstractions provide a unified model for defining, deploying, and managing cloud-native applications and platform infrastructure. While some are more commonly used by developers and others by platform engineers, they are designed to work cohesively in a shared platform model.
+OpenChoreo defines a set of application and platform-level abstractions that simplify how teams design, deploy, and manage cloud-native applications and their environments. These abstractions provide a unified model for defining, deploying, and managing cloud-native applications and platform infrastructure. While some are more commonly used by developers and others by platform engineers, they are designed to work cohesively in a shared platform model.
 
 ---
 
-## 🛠️ Platform and Environment Management
+## Platform Concepts
 These abstractions are primarily used to define infrastructure, environments, and deployment flow.
 
 ### DataPlane
@@ -21,7 +21,7 @@ Represents securely managed configuration values or credentials. Secrets can be 
 
 ---
 
-## 🧩 Application Architecture and Lifecycle
+## Application Concepts
 These abstractions describe how applications are structured, how they communicate with each other, and how they are deployed across environments.
 
 ### Project
