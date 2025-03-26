@@ -16,14 +16,12 @@ OpenChoreo builds upon years of experience at [WSO2](https://wso2.com/) in build
 With OpenChoreo, we're bringing these best ideas to the open-source community in a Kubernetes-native, GitOps-friendly architecture. It is intended to be a complete self-hosted internal developer platform for organizations, while remaining highly customizable to fit existing tools, workflows, and infrastructure requirements.
 
 ## How does OpenChoreo work? (TODO)
-The purpose of this section is to explain the high-level design of OpenChoreo. 
-- How does OpenChoreo add value on top of Kubernetes? 
-- Design diagram
+OpenChoreo provides a set of developer- and platform-focused [abstractions](./docs/choreo-concepts.md) that simplify how applications are built, deployed, and managed on Kubernetes. Developers define [Projects](./docs/choreo-concepts.md#project), [Components](./docs/choreo-concepts.md#component), [Endpoints](./docs/choreo-concepts.md#environment), and [Connections](./docs/choreo-concepts.md#connection)—while platform engineers configure [DataPlanes](./docs/choreo-concepts.md#dataplane), [Environments](./docs/choreo-concepts.md#environment), [DeploymentPipelines](./docs/choreo-concepts.md#deploymentpipeline), and shared infrastructure.
 
-<div align="center">
+The OpenChoreo control plane interprets these high-level abstractions and orchestrates their deployment across one or more Kubernetes clusters. Each Project is mapped to a Kubernetes namespace, and each Component is deployed as a workload resource such as a Deployment, Job, or StatefulSet. Endpoints define how components are exposed within or outside the platform, and Connections declare outbound dependencies to internal or external services. OpenChoreo uses this information to configure ingress and egress gateways, apply network policies, and ensure secure, policy-driven service communication across projects and environments.
 
-![workflow](./docs/images/choreo_overview.svg)
-</div>
+![overview](./docs/images/choreo_overview.svg)
+
 
 ## Getting Started
 
