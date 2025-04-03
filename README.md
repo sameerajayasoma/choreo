@@ -7,21 +7,48 @@ Internal Developer Platform
 [![GitHub issues](https://img.shields.io/github/issues/openchoreo/openchoreo.svg)](https://github.com/openchoreo/openchoreo/issues)
 [![Twitter Follow](https://img.shields.io/twitter/follow/Choreo?style=social)](https://twitter.com/ChoreoDev)
 
-OpenChoreo is an open-source internal developer platform (IDP) designed for both platform engineers and application developers.
-- For platform engineers, it provides a complete yet configurable platform that integrates with CI/CD systems, security tools, and cloud infrastructure. It supports enforcement of organizational policies and reduces the need to manage individual toolchains.
-- For developers, it offers a set of abstractions that simplify working with Kubernetes and other infrastructure components. These abstractions allow developers to design, deploy, and manage applications without direct interaction with the underlying systems.
+OpenChoreo is a complete, open-source Internal Developer Platform (IDP) designed for platform engineering (PE) teams who want to streamline developer workflows and deliver internal developer portals to them without building everything from scratch. Choreo orchestrates many CNCF and other projects to give a comprehensive framework for PE teams to build the platform they want.
 
-OpenChoreo builds upon years of experience at [WSO2](https://wso2.com/) in building [WSO2 Choreo](https://choreo.dev/) — an IDP as a Service. WSO2 Choreo is designed not only to automate software delivery workflows but also to support software engineering practices by enforcing architectural standards, encouraging service reuse, and providing integrated capabilities for API management and observability.
+## Why OpenChoreo?
+Kubernetes gives you powerful primitives like Namespaces, Deployments, CronJobs, Services, and NetworkPolicies—but they’re too low-level for most developers.
 
-With OpenChoreo, we're bringing these best ideas to the open-source community in a Kubernetes-native, GitOps-friendly architecture. It is intended to be a complete self-hosted internal developer platform for organizations, while remaining highly customizable to fit existing tools, workflows, and infrastructure requirements.
+Platform engineers are left to build the actual platform: defining higher-level abstractions and wiring together tools for delivery, access control, and visibility.
 
-## How does OpenChoreo work?
-OpenChoreo provides a set of developer and platform-focused [abstractions](./docs/choreo-concepts.md) that simplify how applications are built, deployed, and managed on Kubernetes. Developers define [Projects](./docs/choreo-concepts.md#project), [Components](./docs/choreo-concepts.md#component), [Endpoints](./docs/choreo-concepts.md#environment), and [Connections](./docs/choreo-concepts.md#connection)—while platform engineers configure [DataPlanes](./docs/choreo-concepts.md#dataplane), [Environments](./docs/choreo-concepts.md#environment), [DeploymentPipelines](./docs/choreo-concepts.md#deploymentpipeline), and shared infrastructure.
+OpenChoreo fills that gap by providing developer-friendly abstractions, along with the essential building blocks of an IDP: GitOps, observability, RBAC, and analytics, all available out of the box.
 
-The OpenChoreo control plane interprets these high-level abstractions and orchestrates their deployment across one or more Kubernetes clusters. Each Project is mapped to a Kubernetes namespace, and each Component is deployed as a workload resource such as a Deployment, Job, or StatefulSet. Endpoints define how components are exposed within or outside the platform, and Connections declare outbound dependencies to internal or external services. OpenChoreo uses this information to configure ingress and egress gateways, apply network policies, and ensure secure, policy-driven service communication across projects and environments.
+With OpenChoreo, we're bringing the best ideas of [WSO2 Choreo](https://choreo.dev/) (an IDP as a Service) to the open-source community. WSO2 Choreo is designed not just to automate software delivery workflows, but to support engineering best practices: enforcing architecture standards, promoting service reuse, and integrating API management and observability.
 
-![overview](./docs/images/choreo_overview.svg)
+## OpenChoreo concepts
+At its core, OpenChoreo provides a control plane that sits on top of one or more Kubernetes clusters, turning them into a cohesive internal developer platform.
 
+OpenChoreo introduces a combination of platform abstractions and application abstractions, enabling platform engineers to define standards and enforce policies while giving developers a simplified, self-service experience.
+
+Platform engineers use the following abstractions to create their internal developer platform:
+![OpenChoreo Platform Abstractions](./docs/images/openchoreo-platform-abstractions.svg)
+
+| OpenChoreo Concept  | Description                                                                                        |
+|---------------------|----------------------------------------------------------------------------------------------------|
+| Organization        | A logical grouping of users and resources, typically aligned to a company, business unit, or team. |
+| Data Plane          | A Kubernetes cluster to host one or more of your deployment environments.                          |
+| Environment         | Separate runtime contexts such as dev, test, staging, and prod for workloads to execute.           |
+| Deployment Pipeline | A defined process that governs how workloads are promoted across environments.                     |
+
+Project managers, architects, and developers use the following abstractions to manage the organization of their work:
+![OpenChoreo Application Abstractions](./docs/images/openchoreo-application-abstractions.svg)
+
+
+| OpenChoreo Concept | Description                                                                                                                                                       | Kubernetes Mapping                                                                                                                           |
+|---------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------|
+| Project | A cloud-native application composed of multiple components. Serves as the unit of isolation.                                                                      | Maps to a set of Namespaces (one per Environemt) in one or more Data planes.                                                                 |
+| Component | A deployable unit within a project, such as a web service, API, worker, or scheduled task.                                                                        | Maps to workload resources like Deployment, Job, or StatefulSet.                                                                             |
+| Endpoint | A network-accessible interface exposed by a component, including routing rules, supported protocols, and visibility scopes (e.g., public, organization, project). | Maps to HTTPRoute (for HTTP), Service resources, and routes via shared ingress gateways. Visibility is enforced via Cilium network policies. |
+| Connection | An outbound service dependency defined by a component, targeting either other components or external systems.                                                     | Translated into Cilium network policies and routed via egress gateways.                                                                      |
+
+
+Architects and developers use the following runtime abstractions to manage how components and projects operate at runtime:
+![OpenChoreo Runtime Project View](./docs/images/openchoreo-project-runtime-view.svg)
+
+At runtime, each Project in OpenChoreo is represented as a Cell - an isolated boundary for execution and communication. A cell encapsulates its Components, along with their Endpoints and Connections. OpenChoreo uses this information to configure ingress and egress gateways, network policies (Cilium), and routing rules (Envoy Gateways) to enforce visibility, trust, and policy between cells.
 
 ## Getting Started
 
