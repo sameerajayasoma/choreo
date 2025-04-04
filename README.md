@@ -36,6 +36,7 @@ Platform engineers use the following abstractions to create their internal devel
 | Data Plane          | A Kubernetes cluster to host one or more of your deployment environments.                          |
 | Environment         | Separate runtime contexts such as dev, test, staging, and prod for workloads to execute.           |
 | Deployment Pipeline | A defined process that governs how workloads are promoted across environments.                     |
+</br>
 
 Project managers, architects, and developers use the following abstractions to manage the organization of their work:
 
@@ -50,7 +51,7 @@ Project managers, architects, and developers use the following abstractions to m
 | Component | A deployable unit within a project, such as a web service, API, worker, or scheduled task.                                                                        | Maps to workload resources like Deployment, Job, or StatefulSet.                                                                             |
 | Endpoint | A network-accessible interface exposed by a component, including routing rules, supported protocols, and visibility scopes (e.g., public, organization, project). | Maps to HTTPRoute (for HTTP), Service resources, and routes via shared ingress gateways. Visibility is enforced via Cilium network policies. |
 | Connection | An outbound service dependency defined by a component, targeting either other components or external systems.                                                     | Translated into Cilium network policies and routed via egress gateways.                                                                      |
-
+</br>
 
 Architects and developers use the following runtime abstractions to manage how components and projects operate at runtime:
 
