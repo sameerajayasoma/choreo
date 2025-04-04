@@ -24,7 +24,11 @@ At its core, OpenChoreo provides a control plane that sits on top of one or more
 OpenChoreo introduces a combination of platform abstractions and application abstractions, enabling platform engineers to define standards and enforce policies while giving developers a simplified, self-service experience.
 
 Platform engineers use the following abstractions to create their internal developer platform:
-![OpenChoreo Platform Abstractions](./docs/images/openchoreo-platform-abstractions.svg)
+
+<div align="center">
+
+![OpenChoreo Platform Abstractions](./docs/images/openchoreo-platform-abstractions.png)
+</div>
 
 | OpenChoreo Concept  | Description                                                                                        |
 |---------------------|----------------------------------------------------------------------------------------------------|
@@ -34,8 +38,11 @@ Platform engineers use the following abstractions to create their internal devel
 | Deployment Pipeline | A defined process that governs how workloads are promoted across environments.                     |
 
 Project managers, architects, and developers use the following abstractions to manage the organization of their work:
-![OpenChoreo Application Abstractions](./docs/images/openchoreo-application-abstractions.svg)
 
+<div align="center">
+
+![OpenChoreo Application Abstractions](./docs/images/openchoreo-application-abstractions.png)
+</div>
 
 | OpenChoreo Concept | Description                                                                                                                                                       | Kubernetes Mapping                                                                                                                           |
 |---------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------|
@@ -46,7 +53,11 @@ Project managers, architects, and developers use the following abstractions to m
 
 
 Architects and developers use the following runtime abstractions to manage how components and projects operate at runtime:
-![OpenChoreo Runtime Project View](./docs/images/openchoreo-project-runtime-view.svg)
+
+<div align="center">
+
+![OpenChoreo Runtime Project View](./docs/images/openchoreo-project-runtime-view.png)
+</div>
 
 At runtime, each Project in OpenChoreo is represented as a Cell - an isolated boundary for execution and communication. A cell encapsulates its Components, along with their Endpoints and Connections. OpenChoreo uses this information to configure ingress and egress gateways, network policies (Cilium), and routing rules (Envoy Gateways) to enforce visibility, trust, and policy between cells.
 
